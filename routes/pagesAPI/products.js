@@ -1,21 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var mysql      = require('mysql');
 var SQL =require('../../connection/sql')
-const bcryptjs=require('bcryptjs');
 /* GET home page. */
 
 
 
 router.get('/', function(req, res, next) {
-  const query="select * from Shops";
+    
+    // const id=req.user.username[0].shopid;
+      console.log(req.query.productId);
+      const query=`select productcode,productname,productvendor,quantityinstock,buyprice,msrp from myproduct where shopid='${req.query.productId}'`;
         SQL.executeQuery(query)
         .then(()=>{
-        console.log("server data");
         var res_str = JSON.stringify(SQL.result);
+        
+        console.log("server data");
+        console.log(query)
         res.send(res_str);
        });
-     console.log(req.user);  
+    
+    //  console.log(req.user);  
+    // console.log(req.user.username[0].shopid);
+    // res.send("Connected");
   
 });
 

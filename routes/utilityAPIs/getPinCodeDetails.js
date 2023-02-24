@@ -13,7 +13,7 @@ router.get('/:pincode', function(req, res, next) {
      });
      
        response.on('end', () => {
-        console.log('Body:', JSON.parse(data))
+        // console.log('Body:', JSON.parse(data))
         res.send(JSON.parse(data))
       });
      
